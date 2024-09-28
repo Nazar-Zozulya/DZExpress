@@ -56,6 +56,14 @@ app.get('/posts', (req, res) => {
     res.render('posts', contet)
 })
 
+app.get('/user/', (req, res) => {
+    const context ={
+        user: [{name: "Nazar", surname: 'Zozulya', age: 16}, {name: "Serj", surname: 'Roman', age: '18-20'}]
+    }
+
+    res.render('user', context)
+})
+
 app.listen(PORT, HOST, () =>{
     console.log('http://localhost:8000')
 })
