@@ -1,0 +1,37 @@
+body{
+    background-color: rgb(71, 71, 71);
+    display: flex;
+    justify-content: center;
+}
+
+div{
+    border: 2px solid black;
+    border-radius: 12px;
+    background: url(https://w7.pngwing.com/pngs/902/280/png-transparent-ace-of-spades-playing-card-ace-of-hearts-spades-game-angle-king-thumbnail.png);
+    background-size: 100%, auto;
+    width: 360px;
+    height: 522px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text{
+    color: rgb(255, 4, 4);
+    font-weight: bolder;
+    text-align: center;
+}
+
+h1{
+    font-size: 70px;
+}
+
+h2{
+    font-size: 50px;
+}
+
+p{
+    font-size: 30px;
+}

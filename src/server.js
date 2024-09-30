@@ -14,9 +14,12 @@ app.set('views', path.join(__dirname, 'templates'))
 // створення посилання на static файли за посиланням /static/, використовую метод static() бібліотеки express.
 app.use('/static/', express.static(path.join(__dirname, 'static')))
 
-// метод додатку express, який очікує запит по вказаному посиланню
-// другим аргументом передається функція, яка здійсниться в момент запиту
-// функція приймає req та res, req - request, res - response
+const allPosts = [{id: 1, name: 'post 1', author: 'author 1', description: 'description 1', date: '28.09.2024'}, 
+                {id:2, name: 'post 2', author: 'author 2', description: 'description 2', date: '29.09.2024'},
+                {id:3, name: 'post 3', author: 'author 3', description: 'description 3', date: '30.09.2024'}
+]
+
+
 app.get('/', (req, res) => {
     // метод send об'єкта res дозволяє надіслати відповідь
     // res.send("hello world")
@@ -48,7 +51,7 @@ app.get('/products', (req, res) => {
 
 app.get('/posts', (req, res) => {
     const contet ={
-        posts: [{name: 'post 1', author: 'author 1'}, {name: 'post 2', author: 'author 2'}],
+        posts: allPosts,
         "title": 'posts'
 
     }
@@ -62,6 +65,20 @@ app.get('/user/', (req, res) => {
     }
 
     res.render('user', context)
+})
+
+app.get('/post/:id', (req, res) => {
+
+    const id = req.params.id
+    const context = {
+        post: allPosts[id-1],
+    }
+    if (id <= allPosts.length){
+        res.render('post', context)
+    } else{
+        // res.send("https://www.youtube.com/watch?v=XeoS-zsGVCs............................https://www.youtube.com/watch?v=dQw4w9WgXcQ............Такого поста немаэ")
+        res.sendFile(path.join(__dirname, './templates/error-post.html'))
+    }
 })
 
 app.listen(PORT, HOST, () =>{

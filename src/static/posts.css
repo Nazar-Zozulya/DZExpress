@@ -31,3 +31,7 @@ h2{
 p{
     color: white;
 }
+
+a{
+    color: red !important;
+}
