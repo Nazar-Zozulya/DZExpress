@@ -11,6 +11,8 @@ app.set('view engine', 'ejs')
 //встановлюємо папки з шаблонами для ejs
 app.set('views', path.join(__dirname, 'templates'))
 
+app.use(express.json()) 
+
 // створення посилання на static файли за посиланням /static/, використовую метод static() бібліотеки express.
 app.use('/static/', express.static(path.join(__dirname, 'static')))
 
@@ -79,6 +81,13 @@ app.get('/post/:id', (req, res) => {
         // res.send("https://www.youtube.com/watch?v=XeoS-zsGVCs............................https://www.youtube.com/watch?v=dQw4w9WgXcQ............Такого поста немаэ")
         res.sendFile(path.join(__dirname, './templates/error-post.html'))
     }
+})
+
+app.post('/post/create', (req, res) => {
+    const data = req.body
+    console.log(data)
+    allPosts.push(data)
+    res.send('okay')
 })
 
 app.listen(PORT, HOST, () =>{
