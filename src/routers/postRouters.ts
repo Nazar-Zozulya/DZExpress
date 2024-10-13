@@ -1,21 +1,21 @@
 // const express = require('express')
 // const router = express.Router()
-import express, { Router  } from 'express'
+import express, { Router } from 'express'
 import controllersPost from '../controllers/postControllers'
 // const postControllers = require('../controllers/postControllers')
 
 
 
+const router = express.Router()
 
+router.get('/all', controllersPost.getAllPosts)
 
-router:Router.get('/all', controllersPost.getAllPosts)
+router.get('/:id', controllersPost.getPostsById)
 
-router:Router.get('/:id', controllersPost.getPostsById)
+router.post('/create', controllersPost.createPosts)
 
-router:Router.post('/create', controllersPost.createPosts)
+// const routerPost = {
+//     router
+// }
 
-const routerPost = {
-    router: Router
-}
-
-export default routerPost
+export default router

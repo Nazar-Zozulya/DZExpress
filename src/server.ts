@@ -17,7 +17,7 @@ app.set('views', path.join(__dirname, 'templates'))
 
 app.use(express.json()) 
 
-app.use('/post/', router:Router)
+app.use('/post/', router)
 
 // створення посилання на static файли за посиланням /static/, використовую метод static() бібліотеки express.
 app.use('/static/', express.static(path.join(__dirname, 'static')))

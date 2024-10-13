@@ -11,7 +11,8 @@ function getAllPosts(req, res) {
     res.render('posts', context);
 }
 function getPostsById(req, res) {
-    const id = req.params.id;
+    var id = Number(req.params.id);
+    // var idNumber:number = id
     const data = postServices_1.default.getPostsById(id);
     if (id = data.length) {
         res.render('post', data.context);

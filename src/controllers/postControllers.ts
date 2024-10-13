@@ -10,10 +10,10 @@ function getAllPosts(req:Request,res:Response) {
 }
 
 function getPostsById(req:Request, res:Response) {
-    var id = req.params.id 
-    var idNumber:number = id
-    const data = servicesList.getPostsById(idNumber)
-    if (idNumber = data.length){
+    var id = Number(req.params.id)
+    // var idNumber:number = id
+    const data = servicesList.getPostsById(id)
+    if (id = data.length){
         res.render('post', data.context)
     } else{
         // res.send("https://www.youtube.com/watch?v=XeoS-zsGVCs............................https://www.youtube.com/watch?v=dQw4w9WgXcQ............Такого поста немаэ")
