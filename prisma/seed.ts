@@ -57,3 +57,19 @@ async function deleteOnePost(){
         }
     })
 }
+
+async function main() {
+    await createOnePost()
+    await createManyPosts()
+    await UpdateOnePost()
+    await getOnePost()
+    await getManyPosts()
+    await deleteOnePost()
+}
+
+main().then(() => {
+    prisma.$disconnect()
+}).catch((err) => {
+    console.log(err)
+    prisma.$disconnect()
+})
