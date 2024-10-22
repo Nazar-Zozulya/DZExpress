@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from 'express'
+import postRepository from './postRepository'
 
 
 const allPosts = [
@@ -8,9 +9,9 @@ const allPosts = [
 ]
 
 
-function getAllPosts() {
+async function getAllPosts() {
     const context = {
-        posts: allPosts
+        posts: await postRepository.getAllPosts()
     }
 
     return context

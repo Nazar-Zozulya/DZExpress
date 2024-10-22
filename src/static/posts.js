@@ -8,7 +8,6 @@ button.addEventListener('click', () => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            id: 4,
             name: 'post 4',
             author: 'author 4',
             description: 'description 4',

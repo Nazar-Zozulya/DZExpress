@@ -1,7 +1,7 @@
 // const express = require('express')
 // const router = express.Router()
 import express, { Router } from 'express'
-import controllersPost from '../controllers/postControllers'
+import controllersPost from './postControllers'
 // const postControllers = require('../controllers/postControllers')
 
 

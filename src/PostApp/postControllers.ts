@@ -1,11 +1,11 @@
 // const postServices = require('../services/postServices')
 // import
 
-import servicesList from "../services/postServices"
+import servicesList from "./postServices"
 import express, { Express, Request, Response } from 'express'
 
-function getAllPosts(req:Request,res:Response) {
-    const context = servicesList.getAllPosts()
+async function getAllPosts(req:Request,res:Response) {
+    const context = await servicesList.getAllPosts()
     res.render('posts', context)
 }
 
