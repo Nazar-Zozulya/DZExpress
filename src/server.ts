@@ -2,8 +2,10 @@
 // const path = require('path')
 import path from 'path'
 import router from './PostApp/postRouters'
+import routerUser from './UserApp/userRouters'
 // const postRouters = require('./routers/postRouters')
 import express, { Express, Request, Response, Router } from 'express'
+import cookieParser from 'cookie-parser';
 
 const app = express()
 
@@ -18,6 +20,10 @@ app.set('views', path.join(__dirname, 'templates'))
 app.use(express.json()) 
 
 app.use('/post/', router)
+
+app.use(cookieParser())
+
+app.use('/user/', routerUser)
 
 // створення посилання на static файли за посиланням /static/, використовую метод static() бібліотеки express.
 app.use('/static/', express.static(path.join(__dirname, 'static')))

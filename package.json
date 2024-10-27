@@ -4,14 +4,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "ts-node src/server.ts"
+    "server": "ts-node src/server.ts",
+    "migrate": "prisma migrate dev",
+    "generate": "prisma generate"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "@prisma/client": "^5.21.0",
+    "@types/cookie-parser": "^1.4.7",
     "@types/express": "^5.0.0",
+    "cookie-parser": "^1.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "path": "^0.12.7",

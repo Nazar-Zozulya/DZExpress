@@ -5,4 +5,6 @@ model Post {
   description String?
   date        DateTime?
   comments    Comment[]
+  post    User    @relation(fields: [Userid], references: [id])
+  Userid Int
 }
