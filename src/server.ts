@@ -69,5 +69,5 @@ app.get('/user/', (req, res) => {
 // })
 
 app.listen(PORT, HOST, () =>{
-    console.log('http://localhost:8000')
+    console.log(`http://localhost:${PORT}`)
 })

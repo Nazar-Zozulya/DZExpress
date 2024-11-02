@@ -7,25 +7,32 @@ function login(req: Request, res: Response){
 }
 
 async function authLogin(req: Request, res: Response){
-    // console.log(req.query)
-    // console.log(req.params.email)
-    // console.log(req.body)
     const auth = await servicesList.authLogin(req.body.email , req.body.password)
     // console.log(auth)
-    res.cookie('user', auth)
-    res.send(auth)
-    // req.cookies
+    if (auth){
+        res.cookie('user', auth)
+        // console.log('yes')
+        res.send(auth)
+    } else {
+        // console.log('not')
+        res.sendStatus(401)
+    }
 }
 
 function registration(req: Request, res: Response){
     res.render('reg')
 }
 
-function authRegistratation(req: Request, res: Response){
-    const data = req.body
-    console.log(data)
-}
+async function authRegistratation(req: Request, res: Response){
+    const reg = await servicesList.authRegistratation(req.body.username, req.body.email, req.body.password)
 
+    if (reg){
+        res.cookie('user', reg)
+        // console.log('yes')
+        res.send(reg)
+    }
+
+}
 const controllersUser = {
     login: login,
     authLogin: authLogin,

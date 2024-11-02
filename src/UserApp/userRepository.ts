@@ -7,9 +7,27 @@ import client from '../client/prismaClient';
 async function findUserByEmail(email:any){
     try {
         var findUserByEmail = await client.user.findUnique({
-            where:
-                email
+            where: {
+                email: email
+            }
         })
+        return findUserByEmail
+    } catch (err) {
+        console.log("Not Found")
+    }
+}
+
+async function createUser(username:any, email:any, password:any){
+    try {
+        var newUser = await client.user.create({
+            data: {
+                username,
+                email,
+                password
+            }
+        })
+
+        return newUser
     } catch (err) {
         console.log("Not Found")
     }
@@ -17,9 +35,9 @@ async function findUserByEmail(email:any){
 
 
 
-
 const postRepository = {
-    findUserByEmail: findUserByEmail
+    findUserByEmail: findUserByEmail,
+    createUser: createUser
 }
 
 
