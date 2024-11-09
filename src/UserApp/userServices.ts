@@ -27,11 +27,7 @@ async function authRegistratation(username:any ,email:any, password:any){
         const user = await userRepository.createUser(username,email,password)
         console.log('User created')
         console.log(user)
-        // return {userExists:'User exists', 
-            // find: user}
     }
-    // console.log(user)
-    // if (user === 'Not Found' )
     
     
     const context = {

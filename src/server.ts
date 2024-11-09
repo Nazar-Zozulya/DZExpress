@@ -25,13 +25,7 @@ app.use(cookieParser())
 
 app.use('/user/', routerUser)
 
-// створення посилання на static файли за посиланням /static/, використовую метод static() бібліотеки express.
 app.use('/static/', express.static(path.join(__dirname, 'static')))
-
-// const allPosts = [{id: 1, name: 'post 1', author: 'author 1', description: 'description 1', date: '28.09.2024'}, 
-//                 {id:2, name: 'post 2', author: 'author 2', description: 'description 2', date: '29.09.2024'},
-//                 {id:3, name: 'post 3', author: 'author 3', description: 'description 3', date: '30.09.2024'}
-// ]
 
 
 app.get('/', (req, res) => {
@@ -67,7 +61,6 @@ app.get('/user/', (req, res) => {
 //     allPosts.push(data)
 //     res.send('okay')
 // })
-
 app.listen(PORT, HOST, () =>{
     console.log(`http://localhost:${PORT}`)
 })

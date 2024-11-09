@@ -1,5 +1,7 @@
 import express, { Express, Request, Response } from 'express'
 import servicesList from "./userServices"
+import { SECRET_KEY } from '../config/token'
+import { sign } from 'jsonwebtoken'
 
 
 function login(req: Request, res: Response){
@@ -10,9 +12,10 @@ async function authLogin(req: Request, res: Response){
     const auth = await servicesList.authLogin(req.body.email , req.body.password)
     // console.log(auth)
     if (auth){
-        res.cookie('user', auth)
+        const token = sign(auth, SECRET_KEY, {expiresIn: '1h'})
+        res.cookie('user', token)
         // console.log('yes')
-        res.send(auth)
+        res.send(token)
     } else {
         // console.log('not')
         res.sendStatus(401)
@@ -27,7 +30,8 @@ async function authRegistratation(req: Request, res: Response){
     const reg = await servicesList.authRegistratation(req.body.username, req.body.email, req.body.password)
 
     if (reg){
-        res.cookie('user', reg)
+        const token = sign(reg, SECRET_KEY, {expiresIn: '1h'})
+        res.cookie('user', token)
         // console.log('yes')
         res.send(reg)
     }
