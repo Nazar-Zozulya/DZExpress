@@ -27,14 +27,16 @@ function registration(req: Request, res: Response){
 }
 
 async function authRegistratation(req: Request, res: Response){
-    const reg = await servicesList.authRegistratation(req.body.username, req.body.email, req.body.password)
+    const data = req.body
+    const reg = await servicesList.authRegistratation(data)
 
-    if (reg){
-        const token = sign(reg, SECRET_KEY, {expiresIn: '1h'})
-        res.cookie('user', token)
-        // console.log('yes')
-        res.send(reg)
+    if (reg.status == 'error'){
+        res.send(reg.message)
+        return
     }
+    const token = sign(reg, SECRET_KEY, {expiresIn: '1h'})
+    res.cookie('user', token)
+    res.status(200)
 
 }
 const controllersUser = {

@@ -17,14 +17,10 @@ async function findUserByEmail(email:any){
     }
 }
 
-async function createUser(username:any, email:any, password:any){
+async function createUser(data: Prisma.UserCreateInput){
     try {
         var newUser = await client.user.create({
-            data: {
-                username,
-                email,
-                password
-            }
+            data: data
         })
 
         return newUser

@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from 'express'
 import userRepository from './userRepository'
+import { Prisma } from "@prisma/client";
 
 
 async function authLogin(email:any, password:any){
@@ -17,26 +18,37 @@ async function authLogin(email:any, password:any){
     return user
 }
 
-async function authRegistratation(username:any ,email:any, password:any){
-    const find = await userRepository.findUserByEmail(email)
-    if(find?.email === email){
+
+interface IUserRegSuccess{
+    status: "success"
+    data: IUser
+}
+
+interface IUserRegError{
+    status:  'error'
+    message: string
+}
+
+interface IUser{
+    username: string
+    email: string
+    password: string
+}
+
+async function authRegistratation(data: Prisma.UserCreateInput): Promise< IUserRegSuccess | IUserRegError >{
+    const find = await userRepository.findUserByEmail(data.email)
+    const create = await userRepository.createUser(data)
+    if(find){
         console.log(find)
         console.log('user Exists')
-        return find
-    } else{
-        const user = await userRepository.createUser(username,email,password)
+        return {status: 'error', message: 'user exists'} 
+    } 
+    if(!create){
         console.log('User created')
-        console.log(user)
+        return {status: 'error', message: 'error create'} 
     }
     
-    
-    const context = {
-        username: username,
-        email: email,
-        password: password
-    }
-
-    return context
+    return {status: 'success', data: create};
 }
 
 const servicesList = {
