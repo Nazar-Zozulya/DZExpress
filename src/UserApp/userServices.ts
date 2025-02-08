@@ -3,22 +3,6 @@ import userRepository from './userRepository'
 import { Prisma } from "@prisma/client";
 
 
-async function authLogin(email:any, password:any){
-    const findEmail = await userRepository.findUserByEmail
-    var user = await findEmail(email)
-    // console.log(user)
-    if(user?.password === password){
-        user?.email === email
-    }
-    // const context = {
-    //     email: email,
-    //     password: password
-    // }
-
-    return user
-}
-
-
 interface IUserRegSuccess{
     status: "success"
     data: IUser
@@ -35,16 +19,31 @@ interface IUser{
     password: string
 }
 
+async function authLogin(email:any, password:any){
+    const findEmail = await userRepository.findUserByEmail
+    var user = await findEmail(email)
+    // console.log(user)
+    if(user?.password === password){
+        user?.email === email
+    }
+    // const context = {
+    //     email: email,
+    //     password: password
+    // }
+
+    return user
+}
+
 async function authRegistratation(data: Prisma.UserCreateInput): Promise< IUserRegSuccess | IUserRegError >{
     const find = await userRepository.findUserByEmail(data.email)
     const create = await userRepository.createUser(data)
     if(find){
-        console.log(find)
-        console.log('user Exists')
+        // console.log(find)
+        // console.log('user Exists')
         return {status: 'error', message: 'user exists'} 
     } 
     if(!create){
-        console.log('User created')
+        // console.log('User created')
         return {status: 'error', message: 'error create'} 
     }
     

@@ -2,24 +2,24 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
-async function createOnePost() {
-    const post = await prisma.post.create({
-        data: {
-            name: 'First name',
-            Author: 'First author'
-        }
-    })
-}
+// async function createOnePost() {
+//     const post = await prisma.post.create({
+//         data: {
+//             name: 'First name',
+//             author: 'First author'
+//         }
+//     })
+// }
 
-async function createManyPosts() {
-    const post = await prisma.post.createMany({
-        data: [
-            { name: 'Second name', Author: 'Second author'},
-            { name: 'Third name', Author: 'Third author', description: 'Third author description'},
-            { name: 'Fourth name', Author: 'Fourth author' }
-        ]
-    })
-}
+// async function createManyPosts() {
+//     const post = await prisma.post.createMany({
+//         data: [
+//             { name: 'Second name', author: 'Second author'},
+//             { name: 'Third name', author: 'Third author', description: 'Third author description'},
+//             { name: 'Fourth name', author: 'Fourth author' }
+//         ]
+//     })
+// }
 
 async function UpdateOnePost(){
     const post = await prisma.post.update({
@@ -28,7 +28,7 @@ async function UpdateOnePost(){
         },
         data: {
             name: 'Updated name',
-            Author: 'Updated Author',
+            author: 'Updated Author',
             description: 'Added description'
         }
     })
@@ -65,41 +65,41 @@ async function deleteOnePost(){
 
 
 
-async function createOneComment(){
-    const comment = await prisma.comment.create({
-        data: {
-            comment: 'First comment',
-            title: 'First title',
-            img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRtCXZnOIjV-MQkeAjjoPd2_SHPmTzJur2A&s',
-            postId: 1
-        }
-    })
-}
+// async function createOneComment(){
+//     const comment = await prisma.comment.create({
+//         data: {
+//             comment: 'First comment',
+//             title: 'First title',
+//             img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRtCXZnOIjV-MQkeAjjoPd2_SHPmTzJur2A&s',
+//             postId: 1
+//         }
+//     })
+// }
 
-async function createManyComments(){
-    const comment = await prisma.comment.createMany({
-        data: [
-            {
-                comment: 'Second comment',
-                title: 'Second title',
-                img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRtCXZnOIjV-MQkeAjjoPd2_SHPmTzJur2A&s',
-                postId: 1
-            },
-            {
-                comment: 'Third comment',
-                title: 'Third title',
-                img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRtCXZnOIjV-MQkeAjjoPd2_SHPmTzJur2A&s',
-                postId: 2
-            },
-            {
-                comment: 'Fourth comment',
-                title: 'Fourth title',
-                img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRtCXZnOIjV-MQkeAjjoPd2_SHPmTzJur2A&s',
-                postId: 2
-            },
-        ]
-    })
-}
+// async function createManyComments(){
+//     const comment = await prisma.comment.createMany({
+//         data: [
+//             {
+//                 comment: 'Second comment',
+//                 title: 'Second title',
+//                 img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRtCXZnOIjV-MQkeAjjoPd2_SHPmTzJur2A&s',
+//                 postId: 1
+//             },
+//             {
+//                 comment: 'Third comment',
+//                 title: 'Third title',
+//                 img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRtCXZnOIjV-MQkeAjjoPd2_SHPmTzJur2A&s',
+//                 postId: 2
+//             },
+//             {
+//                 comment: 'Fourth comment',
+//                 title: 'Fourth title',
+//                 img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmRtCXZnOIjV-MQkeAjjoPd2_SHPmTzJur2A&s',
+//                 postId: 2
+//             },
+//         ]
+//     })
+// }
 
 async function deleteOneComment(){
     const comment = await prisma.comment.delete({
@@ -161,14 +161,14 @@ async function updateOneComment(){
 
 
 async function main() {
-    await createOnePost()
-    await createManyPosts()
+    // await createOnePost()
+    // await createManyPosts()
     await UpdateOnePost()
     await getOnePost()
     await getManyPosts()
     await deleteOnePost()
-    await createOneComment()
-    await createManyComments()
+    // await createOneComment()
+    // await createManyComments()
     await deleteOneComment()
     await findOneComment()
     await findOneCommentByPost

@@ -25,6 +25,13 @@ async function getAllPosts(){
     }
 }
 
+async function createPost(data: Prisma.PostCreateInput){
+    let post = await client.post.create({
+        data: data
+    })
+    return post
+}  
+
 async function getPostById(id: number){
     let post = await client.post.findUnique({
         where:{
@@ -35,16 +42,10 @@ async function getPostById(id: number){
 
 }
 
-async function createProduct(data: Prisma.PostCreateInput){
-    let post = await client.post.create({
-        data: data
-    })
-    return post
-}  
-
-
 const postRepository = {
     getAllPosts:getAllPosts,
+    getPostById:getPostById,
+    createPost:createPost
 }
 
 export default postRepository

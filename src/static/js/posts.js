@@ -1,17 +1,18 @@
-const button = document.querySelector('#btn');
+const form = document.querySelector('#dltBtn');
 
-button.addEventListener('click', () => {
-    // викликаємо функцію, яка викликає сторінку з постами
-    fetch('/post/create', {
+// alert(button)
+form.addEventListener('submit', (event)=>{
+    event.preventDefault();
+    fetch('',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name: 'post 4',
-            author: 'author 4',
-            description: 'description 4',
-            date: '01.10.2024'
+            id: form.id,
+            // author: form.author.value,
+            // description: form.description.value,
+            // date: form.date.value
         })
-    });
-});
+    })
+})

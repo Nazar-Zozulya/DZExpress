@@ -14,9 +14,12 @@
             <h2><%= post.name %></h2>
             <p><%= post.author %></p>
             <a href="/post/<%= post.id  %>">Перейти на пост</a>
+            <form action="" method="POST" id="dltBtn">
+                <button type="submit">delete</button>
+            </form>
         </div>
     <% }) %>
     <button id="btn">create</button>
-    <h2><%= posts.name %></h2>
+    <!-- <h2><%= posts.name %></h2> -->
 </body>
 </html>

@@ -16,9 +16,11 @@ const router = express.Router()
 
 router.get('/all', controllersPost.getAllPosts)
 
-router.get('/:id',  controllersPost.getPostsById)
+router.get('/showcreate', controllersPost.showCreatePosts)
 
 router.post('/create',  controllersPost.createPosts)
+
+router.get('/:id',  controllersPost.getPostsById)
 
 // const routerPost = {
 //     router
