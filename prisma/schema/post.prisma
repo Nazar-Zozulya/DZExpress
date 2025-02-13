@@ -4,6 +4,6 @@ model Post {
   author      String
   description String
   comments    Comment[]
-  // post    User    @relation(fields: [Userid], references: [id])
-  // Userid Int
+  user    User    @relation(fields: [Userid], references: [id])
+  Userid Int
 }

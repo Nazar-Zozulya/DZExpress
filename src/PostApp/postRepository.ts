@@ -42,10 +42,20 @@ async function getPostById(id: number){
 
 }
 
+// async function deletePost(id: Pri){
+//     let post = await client.post.delete({
+//         where: {
+//             id: id,
+//         }
+//     })
+// }
+
 const postRepository = {
     getAllPosts:getAllPosts,
     getPostById:getPostById,
-    createPost:createPost
+    createPost:createPost,
+    // deletePost:deletePost,
+
 }
 
 export default postRepository

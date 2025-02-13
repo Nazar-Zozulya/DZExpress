@@ -1,23 +1,24 @@
 import express, { Express, Request, Response } from 'express'
 import userRepository from './userRepository'
 import { Prisma } from "@prisma/client";
+import { User } from './types'
+import { IError, ISuccess } from '../types/types'
 
+// interface IUserRegSuccess{
+//     status: "success"
+//     data: IUser
+// }
 
-interface IUserRegSuccess{
-    status: "success"
-    data: IUser
-}
+// interface IUserRegError{
+//     status:  'error'
+//     message: string
+// }
 
-interface IUserRegError{
-    status:  'error'
-    message: string
-}
-
-interface IUser{
-    username: string
-    email: string
-    password: string
-}
+// interface IUser{
+//     username: string
+//     email: string
+//     password: string
+// }
 
 async function authLogin(email:any, password:any){
     const findEmail = await userRepository.findUserByEmail
@@ -34,7 +35,7 @@ async function authLogin(email:any, password:any){
     return user
 }
 
-async function authRegistratation(data: Prisma.UserCreateInput): Promise< IUserRegSuccess | IUserRegError >{
+async function authRegistratation(data: Prisma.UserCreateInput): Promise< ISuccess<User> | IError >{
     const find = await userRepository.findUserByEmail(data.email)
     const create = await userRepository.createUser(data)
     if(find){
