@@ -3,9 +3,13 @@
 import path from 'path'
 import router from './PostApp/postRouters'
 import routerUser from './UserApp/userRouters'
+import postRouterApi from './PostApp/postRoutersApi'
+import commentRouterApi from './CommentApp/commentRoutersApi'
 // const postRouters = require('./routers/postRouters')
 import express, { Express, Request, Response, Router } from 'express'
 import cookieParser from 'cookie-parser';
+import cors from 'cors'
+
 
 const app = express()
 
@@ -19,6 +23,17 @@ app.set('views', path.join(__dirname, 'templates'))
 
 app.use(express.json()) 
 
+app.use(cors({
+    origin: ['http://localhost:3000']
+}))
+
+
+
+
+app.use('/api/comment/', commentRouterApi)
+
+app.use('/api/post/', postRouterApi)
+
 app.use('/post/', router)
 
 app.use(cookieParser())
@@ -28,6 +43,7 @@ app.use('/user/', routerUser)
 app.use('/static/', express.static(path.join(__dirname, 'static')))
 
 
+
 app.get('/', (req, res) => {
     const context = {
        "posts": [{name: 12, author: 12}, {name: 12, author: 12}],
@@ -35,6 +51,8 @@ app.get('/', (req, res) => {
     }
     res.render('index', context)
 })
+
+
 
 // app.get('/posts', (req, res) => {
 //     const contet ={
