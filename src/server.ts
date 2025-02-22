@@ -5,6 +5,7 @@ import router from './PostApp/postRouters'
 import routerUser from './UserApp/userRouters'
 import postRouterApi from './PostApp/postRoutersApi'
 import commentRouterApi from './CommentApp/commentRoutersApi'
+import tagsRouterApi from './TagsApp/tagsRoutersApi'
 // const postRouters = require('./routers/postRouters')
 import express, { Express, Request, Response, Router } from 'express'
 import cookieParser from 'cookie-parser';
@@ -31,6 +32,8 @@ app.use(cors({
 
 
 app.use('/api/comment/', commentRouterApi)
+
+app.use('/api/tags/', tagsRouterApi)
 
 app.use('/api/post/', postRouterApi)
 

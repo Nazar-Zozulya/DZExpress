@@ -6,4 +6,5 @@ model Post {
   comments    Comment[]
   user    User    @relation(fields: [Userid], references: [id])
   Userid Int
+  tags Tags[]
 }
