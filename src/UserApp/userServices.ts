@@ -3,6 +3,9 @@ import userRepository from './userRepository'
 import { Prisma } from "@prisma/client";
 import { User } from './types'
 import { IError, ISuccess } from '../types/types'
+import { compare, hash } from 'bcrypt'
+import { sign } from 'jsonwebtoken';
+import { SECRET_KEY } from '../config/token';
 
 // interface IUserRegSuccess{
 //     status: "success"
@@ -20,35 +23,40 @@ import { IError, ISuccess } from '../types/types'
 //     password: string
 // }
 
-async function authLogin(email:any, password:any){
-    const findEmail = await userRepository.findUserByEmail
-    var user = await findEmail(email)
-    // console.log(user)
-    if(user?.password === password){
-        user?.email === email
-    }
-    // const context = {
-    //     email: email,
-    //     password: password
-    // }
+async function authLogin(email:any, password:any): Promise< ISuccess<string> | IError >{
+    let user = await await userRepository.findUserByEmail(email)
 
-    return user
+    if(!user){
+        return {status: 'error', message: 'користувач не найден'} 
+    }
+
+    compare(user.password, password)
+    if(!compare){
+        return {status: 'error', message: 'Паролі не співпадають'} 
+    }
+
+    const token = sign(user, SECRET_KEY, {expiresIn: '1h'})
+
+    return {status: 'success', data: token}
 }
 
-async function authRegistratation(data: Prisma.UserCreateInput): Promise< ISuccess<User> | IError >{
+async function authRegistratation(data: Prisma.UserCreateInput): Promise< ISuccess<string> | IError >{
     const find = await userRepository.findUserByEmail(data.email)
     const create = await userRepository.createUser(data)
     if(find){
-        // console.log(find)
-        // console.log('user Exists')
         return {status: 'error', message: 'user exists'} 
-    } 
-    if(!create){
-        // console.log('User created')
-        return {status: 'error', message: 'error create'} 
     }
     
-    return {status: 'success', data: create};
+    if(!create){
+        return {status: 'error', message: 'error create'} 
+    }
+
+
+    hash(create?.password, 'salt')
+
+    const token = sign(create, SECRET_KEY, {expiresIn: '1h'})
+    
+    return {status: 'success', data: token};
 }
 
 const servicesList = {

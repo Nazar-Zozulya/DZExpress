@@ -37,11 +37,12 @@ app.use('/api/tags/', tagsRouterApi)
 
 app.use('/api/post/', postRouterApi)
 
+app.use('/api/user/', routerUser)
+
 app.use('/post/', router)
 
 app.use(cookieParser())
 
-app.use('/user/', routerUser)
 
 app.use('/static/', express.static(path.join(__dirname, 'static')))
 
