@@ -29,11 +29,25 @@ async function createUser(data: Prisma.UserCreateInput){
     }
 }
 
+async function  findUserById(id: number){
+    try {
+        var findUserById = await client.user.findUnique({
+            where: {
+                id: id
+            }
+        })
+        return findUserById
+    } catch (err) {
+        console.log("Not Found")
+    }
+}
+
 
 
 const postRepository = {
     findUserByEmail: findUserByEmail,
-    createUser: createUser
+    createUser: createUser,
+    findUserById: findUserById,
 }
 
 

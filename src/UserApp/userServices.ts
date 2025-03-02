@@ -4,7 +4,7 @@ import { Prisma } from "@prisma/client";
 import { User } from './types'
 import { IError, ISuccess } from '../types/types'
 import { compare, hash } from 'bcrypt'
-import { sign } from 'jsonwebtoken';
+import { JwtPayload, sign } from 'jsonwebtoken';
 import { SECRET_KEY } from '../config/token';
 
 // interface IUserRegSuccess{
@@ -35,7 +35,7 @@ async function authLogin(email:any, password:any): Promise< ISuccess<string> | I
         return {status: 'error', message: 'Паролі не співпадають'} 
     }
 
-    const token = sign(user, SECRET_KEY, {expiresIn: '1h'})
+    const token = sign({id: user.id}, SECRET_KEY, {expiresIn: '1h'})
 
     return {status: 'success', data: token}
 }
@@ -59,9 +59,19 @@ async function authRegistratation(data: Prisma.UserCreateInput): Promise< ISucce
     return {status: 'success', data: token};
 }
 
+async function seeMe(token: string): Promise< ISuccess<string> | IError >{
+    const user = userRepository.findUserById(+token.indexOf('id'))
+    if(!user){
+        return {status: 'error', message: 'error token'} 
+    }
+
+    return {status: 'success', data: token};
+}
+
 const servicesList = {
     authLogin: authLogin,
-    authRegistratation: authRegistratation
+    authRegistratation: authRegistratation,
+    seeMe: seeMe,
 }
 
 export default servicesList

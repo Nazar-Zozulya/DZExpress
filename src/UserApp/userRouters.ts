@@ -12,4 +12,6 @@ routerUser.post('/login', controllersUser.authLogin)
 
 routerUser.post('/reg', controllersUser.authRegistratation)
 
+routerUser.get('/me', controllersUser.seeMe)
+
 export default routerUser
