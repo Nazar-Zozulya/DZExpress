@@ -2,22 +2,37 @@ import {Request, Response, NextFunction} from 'express';
 import { userRoleMiddleware } from './userRoleMiddleware';
 import { verify } from 'jsonwebtoken';
 import { SECRET_KEY } from '../config/token';
+
+
+interface IToken {
+    iat: number
+    exp: number
+    id: number
+}
+
 export function authTokenMiddleware(req: Request, res: Response, next: NextFunction){
-    const token = req.headers.authorization
+
+    const auth = req.headers.authorization
     // const cookies = req.cookies
-    if (token){
-
-        if (token === undefined){
-            return res.sendStatus(401)
-        }
-
-        const varifyToken = verify(token,  SECRET_KEY)
-        // const token = verify(cookies.token, SECRET_KEY)
-        // console.log("user authenticated ")
-        res.locals.user = varifyToken
-        next(userRoleMiddleware)
-    } else {
-        res.sendStatus(401)
+    if (!auth){
+        res.json({status: 'error', message: 'Ошибка дон'})
+        return
     }
+    const [type, token] = auth.split(' ')
+
+    if( type !== 'Bearer' || !token){
+        res.json({status: 'error', message: 'Ошибка токена или типа дон'})
+        return
+    }
+
+
+    try{
+        const decodedToken = verify(token, SECRET_KEY) as IToken
+        res.locals.userId = decodedToken.id
+        next()
+    } catch (err) {
+        res.json({status: 'error', message: 'плохой токен дон'})
+    }
+
 }
 

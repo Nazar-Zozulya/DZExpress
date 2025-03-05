@@ -59,13 +59,14 @@ async function authRegistratation(data: Prisma.UserCreateInput): Promise< ISucce
     return {status: 'success', data: token};
 }
 
-async function seeMe(token: string): Promise< ISuccess<string> | IError >{
-    const user = userRepository.findUserById(+token.indexOf('id'))
-    if(!user){
-        return {status: 'error', message: 'error token'} 
+async function seeMe(id: number): Promise< ISuccess<User> | IError >{
+    const user = await userRepository.findUserById(id);
+
+    if (!user) {
+        return {status: 'error', message: "Нету юзера дон"}
     }
 
-    return {status: 'success', data: token};
+    return {status: 'success', data: user}
 }
 
 const servicesList = {
