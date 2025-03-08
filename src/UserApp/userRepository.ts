@@ -1,6 +1,6 @@
-// Импорт не используется, нужно убрать
-import { Prisma, PrismaClient} from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import client from '../client/prismaClient';
+import { errors, IErrors } from '../config/errorCodes';
 
 
 
@@ -13,9 +13,13 @@ async function findUserByEmail(email:any){
             }
         })
         return findUserByEmail
-    } catch (err) {
-        // здесь не not found нужно, а вывести сообщение ошибки из err, для этого надо обработать что это ошибка призмы. P.S. Тоже самое в остальных репозиториях!
-        console.log("Not Found")
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
+            }
+        }
     }
 }
 
@@ -26,8 +30,13 @@ async function createUser(data: Prisma.UserCreateInput){
         })
 
         return newUser
-    } catch (err) {
-        console.log("Not Found")
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+                    if (error.code in Object.keys(errors)){
+                        const errorKey: keyof IErrors = error.code
+                        console.log(errors[errorKey])
+                    }
+                }
     }
 }
 
@@ -39,8 +48,13 @@ async function  findUserById(id: number){
             }
         })
         return findUserById
-    } catch (err) {
-        console.log("Not Found")
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
+            }
+        }
     }
 }
 

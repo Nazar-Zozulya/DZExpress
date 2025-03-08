@@ -1,6 +1,6 @@
-// Импорт не используется, нужно убрать
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import client from '../client/prismaClient';
+import { errors, IErrors } from '../config/errorCodes';
 
 async function getAllPosts(){
     try{
@@ -8,48 +8,52 @@ async function getAllPosts(){
         
         })
         return post
-    } catch(err){
-        if (err instanceof Prisma.PrismaClientKnownRequestError){
-            if (err.code == 'P2002'){
-                console.log(err.message);
-                throw err;
-            }
-            if (err.code == 'P2015'){
-                console.log(err.message);
-                throw err;
-            }
-            if (err.code == 'P2019'){
-                console.log(err.message);
-                throw err;
+    } catch(error){
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
             }
         }
     }
 }
 
 async function createPost(data: Prisma.PostCreateInput){
-    let post = await client.post.create({
-        data: data
-    })
-    return post
+    try{
+        let post = await client.post.create({
+            data: data
+        })
+        return post
+    }
+    catch(error){
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
+            }
+        }
+    }
 }  
 
 async function getPostById(id: number){
-    let post = await client.post.findUnique({
-        where:{
-            id: id
+    try{
+        let post = await client.post.findUnique({
+            where:{
+                id: id
+            }
+        })
+        return post
+    }
+    catch(error){
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
+            }
         }
-    })
-    return post
+    }
 
 }
-
-// async function deletePost(id: Pri){
-//     let post = await client.post.delete({
-//         where: {
-//             id: id,
-//         }
-//     })
-// }
 
 const postRepository = {
     getAllPosts:getAllPosts,

@@ -1,36 +1,8 @@
-//  Импорт не используется, нужно убрать
-import express, { Express, Request, Response } from 'express'
 import { Prisma } from "@prisma/client";
-// import { IPost } from '../PostApp/postServices'
 import commentRepository from './commentRepository'
 
 import { Comment } from './types'
 import { IError, ISuccess } from '../types/types'
-
-
-// interface IComment{
-//     id: number;
-//     comment: string;
-//     title: string;
-//     img: string | null;
-//     // post: IPost
-//     postId: number;
-// }
-
-// interface ICommentError{
-//     status: 'error',
-//     message: string
-// }
-
-// interface ICommentsByIdSuccess{
-//     status: 'success',
-//     data: IComment[]
-// }
-
-// interface ICommentSuccess{
-//     status: 'success',
-//     data: IComment
-// }
 
 
 

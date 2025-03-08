@@ -1,6 +1,4 @@
 import {Request, Response, NextFunction} from 'express';
-// Импорт не используется, нужно убрать
-import { userRoleMiddleware } from './userRoleMiddleware';
 import { verify } from 'jsonwebtoken';
 import { SECRET_KEY } from '../config/token';
 
@@ -14,7 +12,6 @@ interface IToken {
 export function authTokenMiddleware(req: Request, res: Response, next: NextFunction){
 
     const auth = req.headers.authorization
-    // const cookies = req.cookies
     if (!auth){
         res.json({status: 'error', message: 'Ошибка дон'})
         return

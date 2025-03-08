@@ -1,22 +1,41 @@
-// Импорт не используется, нужно убрать
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import client from '../client/prismaClient';
-// тут плохо с репо, делаем также как и в tag 
+import { errors, IErrors } from '../config/errorCodes';
 
 async function getCommentsById(id: number){
-    let comments = await client.comment.findMany({
-        where: {
-            postId: id
+    try{
+        let comments = await client.comment.findMany({
+            where: {
+                postId: id
+            }
+        })
+        return comments;
+    }
+    catch(error){
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
+            }
         }
-    })
-    return comments;
+    }
 }
 
 async function createComment(data: Prisma.CommentCreateInput){
-    let comment = await client.comment.create({
-        data: data
-    })
-    return comment
+    try{
+        let comment = await client.comment.create({
+            data: data
+        })
+        return comment
+    }
+    catch(error){
+        if (error instanceof Prisma.PrismaClientKnownRequestError){
+            if (error.code in Object.keys(errors)){
+                const errorKey: keyof IErrors = error.code
+                console.log(errors[errorKey])
+            }
+        }
+    }
 }  
 
 

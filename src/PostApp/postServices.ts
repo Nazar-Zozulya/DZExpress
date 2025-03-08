@@ -1,5 +1,3 @@
-// Импорт не используется, нужно убрать
-import express, { Express, Request, Response } from 'express'
 import postRepository from './postRepository'
 import { Prisma } from "@prisma/client";
 import { Post } from './types'
@@ -34,16 +32,6 @@ async function createPosts(data: Prisma.PostCreateInput): Promise< ISuccess<Post
 
     return {status: 'success', data: post}
 }
-
-// async function deletePosts(id: number): Promise< ISuccess<Post> | IError > {
-//     const post = await postRepository.deletePost(id)
-
-//     if(!post){
-//         return {status: 'error', message: 'error creating post'};
-//     }
-
-//     return {status: 'success', data: post}
-// }
 
 const servicesList = {
     getAllPosts: getAllPosts,

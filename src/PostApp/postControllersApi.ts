@@ -1,17 +1,10 @@
 import servicesList from "./postServices";
 import { Request, Response } from "express";
 
-
-
-
-
-
 async function getAllPosts(req: Request, res: Response){
-    // а вызов функции
-    const result = await servicesList.getAllPosts
+    const result = await servicesList.getAllPosts()
     res.json(result)
 }
-
 
 async function getPostById(req: Request, res: Response){
     const id = req.params.id

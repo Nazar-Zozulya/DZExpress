@@ -1,1 +1,1 @@
-export const SECRET_KEY = 'nigggg....52_calillac_morgen.mp3' // в .env вынести
+export const SECRET_KEY = process.env.SECRET_KEY ? process.env.SECRET_KEY : 'ne nigggg....52_calillac_morgen.mp3'

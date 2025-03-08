@@ -1,8 +1,5 @@
-// const postServices = require('../services/postServices')
-// import
-// Импорт не используется, нужно убрать
 import servicesList from "./postServices"
-import { Express, Request, Response } from 'express'
+import { Request, Response } from 'express'
 
 async function getAllPosts(req:Request,res:Response) {
     const context = await servicesList.getAllPosts()

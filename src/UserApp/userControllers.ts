@@ -1,8 +1,5 @@
-import express, { Express, Request, Response } from 'express'
+import { Request, Response } from 'express'
 import servicesList from "./userServices"
-// Импорт не используется, нужно убрать
-import { SECRET_KEY } from '../config/token'
-import { sign, decode } from 'jsonwebtoken'
 
 async function authLogin(req: Request, res: Response){
     const result = await servicesList.authLogin(req.body.email , req.body.password)
@@ -19,7 +16,7 @@ async function authRegistratation(req: Request, res: Response){
 
 async function seeMe(req: Request, res: Response){
     const id = res.locals.userId
-    const result = await servicesList.seeMe(id)
+    const result = await servicesList.getMe(id)
 
     res.json(result)
 }
