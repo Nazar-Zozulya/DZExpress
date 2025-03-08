@@ -1,4 +1,4 @@
-import {Router} from "express"
+import { Router } from "express"
 import commentControllersApi from "./commentControllersApi"
 
 const router = Router()

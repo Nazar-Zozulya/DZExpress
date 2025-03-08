@@ -1,9 +1,9 @@
-import express from 'express'
+import { Router } from 'express'
 import controllersUser from './userControllers'
 import { authTokenMiddleware } from '../middlewares/authTokenMiddleware'
 
 
-const routerUser = express.Router()
+const routerUser = Router()
 
 routerUser.post('/login', controllersUser.authLogin)
 
