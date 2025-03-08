@@ -1,3 +1,4 @@
+// Импорт не используется, нужно убрать
 import express, { Router } from 'express'
 import controllersUser from './userControllers'
 import { authTokenMiddleware } from '../middlewares/authTokenMiddleware'

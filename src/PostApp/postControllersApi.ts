@@ -7,6 +7,7 @@ import { Request, Response } from "express";
 
 
 async function getAllPosts(req: Request, res: Response){
+    // а вызов функции
     const result = await servicesList.getAllPosts
     res.json(result)
 }

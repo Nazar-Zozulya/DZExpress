@@ -7,6 +7,7 @@ import postRouterApi from './PostApp/postRoutersApi'
 import commentRouterApi from './CommentApp/commentRoutersApi'
 import tagsRouterApi from './TagsApp/tagsRoutersApi'
 // const postRouters = require('./routers/postRouters')
+// Импорт не используется, нужно убрать
 import express, { Express, Request, Response, Router } from 'express'
 import cookieParser from 'cookie-parser';
 import cors from 'cors'

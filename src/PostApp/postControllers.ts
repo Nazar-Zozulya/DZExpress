@@ -1,6 +1,6 @@
 // const postServices = require('../services/postServices')
 // import
-
+// Импорт не используется, нужно убрать
 import servicesList from "./postServices"
 import { Express, Request, Response } from 'express'
 

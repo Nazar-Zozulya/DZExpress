@@ -1,3 +1,4 @@
+// Импорт не используется, нужно убрать
 import { Prisma, PrismaClient} from '@prisma/client';
 import client from '../client/prismaClient';
 
@@ -13,6 +14,7 @@ async function findUserByEmail(email:any){
         })
         return findUserByEmail
     } catch (err) {
+        // здесь не not found нужно, а вывести сообщение ошибки из err, для этого надо обработать что это ошибка призмы. P.S. Тоже самое в остальных репозиториях!
         console.log("Not Found")
     }
 }

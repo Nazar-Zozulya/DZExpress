@@ -1,1 +1,1 @@
-export const SECRET_KEY = 'nigggg....52_calillac_morgen.mp3'
+export const SECRET_KEY = 'nigggg....52_calillac_morgen.mp3' // в .env вынести

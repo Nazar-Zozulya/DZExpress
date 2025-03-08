@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from 'express'
 import servicesList from "./userServices"
+// Импорт не используется, нужно убрать
 import { SECRET_KEY } from '../config/token'
 import { sign, decode } from 'jsonwebtoken'
 

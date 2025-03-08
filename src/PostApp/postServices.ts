@@ -1,3 +1,4 @@
+// Импорт не используется, нужно убрать
 import express, { Express, Request, Response } from 'express'
 import postRepository from './postRepository'
 import { Prisma } from "@prisma/client";

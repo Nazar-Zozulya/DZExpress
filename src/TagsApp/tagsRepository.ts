@@ -8,6 +8,7 @@ async function getAllTags(){
         })
         return tags
     } catch(err){
+        // если так обрабатываешь ошибки призмы тут, то и в остальных репо так делаем
         if (err instanceof Prisma.PrismaClientKnownRequestError){
             if (err.code == 'P2002'){
                 console.log(err.message);
